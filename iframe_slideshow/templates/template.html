@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+    @white: #fff;
+    @black: #000;
+
+    .navbar {
+      margin-bottom:0;
+      border-radius:0;
+      color:@white;
+      .btn {
+        transition:.5s;
+        background:@black;
+        border-color:@black;
+        color:@white;
+        border-radius:0;
+        &:hover,&:focus {
+          background:@white;
+          color:@black;
+        }
+      }
+    }
+
+    .currentIframe {
+      display:block;
+      width: 100%;
+      min-height: 800px;
+      margin: auto;
+      background:#ccc;
+    }
+
+    .iframe {
+      display:None
+    }
+
+    .highlight{
+        color:red;
+    }
+    </style>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    </div>
+      {% for l in label_list %}
+        <a href="#" class="param-label btn btn-default navbar-btn">{{ l }}</a>
+      {% endfor %}
+    <div class="pull-right">
+        <a id="loop" href="#" class="btn btn-default navbar-btn">Loop</a>
+        <a id="stop" href="#" class="btn btn-default navbar-btn">Stop</a>
+    </div>
+  </div>
+</nav>
+
+{% for url in src_list %}
+    <iframe class='iframe' src="{{ url }}" frameborder="0">
+      Your browser doesn't support iframes.
+    </iframe>
+{% endfor %}
+
+</body>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+  pages = $(".iframe"),
+  numPages = pages ? pages.length : 0;
+  i = -1;
+
+  label_divs = $(".param-label");
+
+  TIME_PER_PAGE = 2500;
+  rotateTimeout = setInterval(nextPage,TIME_PER_PAGE);
+
+
+});
+
+$('#loop').click(function() {
+
+
+   $(label_divs).removeClass('highlight');
+   rotateTimeout = setInterval(nextPage,TIME_PER_PAGE);
+
+});
+
+function nextPage() {
+
+        $(pages[i]).removeClass('currentIframe');
+        $(pages[i]).addClass('iframe');
+        $(label_divs[i]).removeClass('highlight');
+
+        i = ++i % numPages;
+
+        $(pages[i]).addClass('currentIframe');
+        $(pages[i]).removeClass('iframe');
+        $(label_divs[i]).addClass('highlight');
+
+}
+
+
+
+
+$('#stop').click(function() {
+
+
+    clearInterval(rotateTimeout);
+
+});
+</script>
+
+</html>
