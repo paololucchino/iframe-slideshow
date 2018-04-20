@@ -1,6 +1,6 @@
 # iframe-slideshow
 
-Module rendering html file that loops thought url list and associated labels.
+Module rendering html file with iframe that loops thought url list and associated labels.
 
 '''
 
