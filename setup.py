@@ -19,7 +19,7 @@ setup(
     packages = find_packages(),
     include_package_data=True,
     package_data={
-        'iframe_slideshow': ['tempates/*.html'],
+        'iframe_slideshow': ['templates/*.html'],
     },
     install_requires=['jinja2'],
 )
