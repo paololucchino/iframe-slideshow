@@ -8,8 +8,6 @@ class IFrameSlideshow():
         self.src_list = src_list
         self.label_list = label_list
 
-        self.THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-
     def save(self, filename='temp.html'):
 
         j2_env = Environment(loader=PackageLoader('iframe_slideshow', 'templates'),
@@ -21,6 +19,5 @@ class IFrameSlideshow():
 
         with open(filename, 'w') as handle:
             handle.write(rendered_html)
-
 
         return rendered_html
